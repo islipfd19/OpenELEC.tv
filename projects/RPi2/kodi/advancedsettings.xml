@@ -1,20 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <advancedsettings>
+  <loglevel hide="false">3</loglevel>
+  <fanartheight>560</fanartheight>
+  <thumbsize>256</thumbsize>
+  <splash>false</splash>
+  <packagefoldersize>500</packagefoldersize>
   <showexitbutton>false</showexitbutton>
+  <skiploopfilter>32</skiploopfilter>
 
-  <fanartres>720</fanartres>
-  <imageres>540</imageres>
-
-  <video>
-    <busydialogdelayms>750</busydialogdelayms>
-  </video>
-
-  <samba>
-    <clienttimeout>30</clienttimeout>
-  </samba>
+  <cputempcommand>sed -e 's/\([0-9]*\)[0-9]\{3\}.*/\1 C/' /sys/class/thermal/thermal_zone0/temp</cputempcommand>
+  <gputempcommand>vcgencmd measure_temp | sed -e "s/temp=//" -e "s/\..*'/ /"</gputempcommand>
 
   <network>
+    <cachemembuffersize>54525952</cachemembuffersize>
+    <buffermode>0</buffermode>
     <readbufferfactor>4.0</readbufferfactor>
   </network>
+
+  <video>
+    <playcountminimumpercent>55</playcountminimumpercent>
+    <ignoresecondsatstart>180</ignoresecondsatstart>
+    <ignorepercentatend>8</ignorepercentatend>
+    <blackbarcolour>0</blackbarcolour>
+
+    <excludefromscan>
+      <regexp>Recycle</regexp>
+    </excludefromscan>
+
+    <excludefromlisting> <!-- Regular expressions that if evaluated to true won't be displayed in Files View -->
+      <regexp>Recycle</regexp>
+    </excludefromlisting>
+
+    <excludetvshowsfromscan>
+      <regexp>Recycle</regexp>
+      <regexp>Sample</regexp>
+      <regexp>TempRec</regexp>
+    </excludetvshowsfromscan>
+  </video>
+
+  <videodatabase>
+    <type>mysql</type>
+    <host>192.168.1.203</host>
+    <port>3306</port>
+    <user>kodi</user>
+    <pass>kodi</pass>
+  </videodatabase> 
+
+  <musicdatabase>
+    <type>mysql</type>
+    <host>192.168.1.203</host>
+    <port>3306</port>
+    <user>kodi</user>
+    <pass>kodi</pass>
+  </musicdatabase>
+
+  <videolibrary>
+    <cleanonupdate>true</cleanonupdate> <!-- Also clean library during library update -->
+    <importwatchedstate>true</importwatchedstate>
+    <importresumepoint>true</importresumepoint>
+    <backgroundupdate>true</backgroundupdate> <!-- set to "true" to hide the video scanner dialog from the GUI -->
+      <!-- NOTE: To get this working properly, you have to do a 'Clean Library' in settings the first time after you enable the setting. -->
+    <recentlyaddeditems>35</recentlyaddeditems>
+  </videolibrary>
+
+  <musiclibrary>
+    <cleanonupdate>true</cleanonupdate>
+    <backgroundupdate>true</backgroundupdate>
+  </musiclibrary>
+
+
+  <videoscanner>
+    <ignoreerrors>true</ignoreerrors> <!-- Set to true to silently ignore errors while scanning videos. This prevents the error dialogue box, so you don't have to keep hitting "yes" to keep scanning.-->
+  </videoscanner>
+
+  <audio>
+    <excludefromscan>
+      <regexp>[!-._ \\/]sample[-._ \\/]</regexp>
+      <regexp>Recycle</regexp>
+    </excludefromscan>
+
+    <excludefromlisting> <!-- Regular expressions that if evaluated to true won't be displayed in Files View -->
+      <regexp>Recycle</regexp>
+    </excludefromlisting>
+  </audio>
 
 </advancedsettings>
