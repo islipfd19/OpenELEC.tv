@@ -31,3 +31,4 @@ mkpkg-temp
 
 # unofficial packages
 /packages/unofficial
+/packages/addons/unofficial
