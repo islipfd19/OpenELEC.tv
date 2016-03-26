@@ -16,38 +16,24 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="visualization.shadertoy"
-PKG_VERSION="5b64785"
+PKG_NAME="libXmu"
+PKG_VERSION="1.1.2"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/notspiff/visualization.shadertoy"
-PKG_GIT_URL="https://github.com/notspiff/visualization.shadertoy"
-PKG_GIT_BRANCH="master"
-PKG_DEPENDS_TARGET="toolchain kodi-platform glew"
+PKG_LICENSE="OSS"
+PKG_SITE="http://www.X.org"
+PKG_URL="http://xorg.freedesktop.org/archive/individual/lib/$PKG_NAME-$PKG_VERSION.tar.bz2"
+PKG_DEPENDS_TARGET="toolchain util-macros xextproto libXext libX11 libXt"
 PKG_PRIORITY="optional"
-PKG_SECTION=""
-PKG_SHORTDESC="visualization.shadertoy"
-PKG_LONGDESC="visualization.shadertoy"
-PKG_AUTORECONF="no"
+PKG_SECTION="x11/lib"
+PKG_SHORTDESC="libxmu: X11 miscellaneous utility library"
+PKG_LONGDESC="LibXmu provides a set of miscellaneous utility convenience functions for X libraries to use."
 
-PKG_IS_ADDON="yes"
-PKG_ADDON_TYPE="xbmc.player.musicviz"
+PKG_IS_ADDON="no"
+PKG_AUTORECONF="yes"
 
-if [ "$OPENGL" = "no" ] ; then
-  exit 0
-fi
+PKG_CONFIGURE_OPTS_TARGET="--enable-static --disable-shared --with-gnu-ld --without-xmlto"
 
-configure_target() {
-  cmake -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
-        -DCMAKE_INSTALL_PREFIX=/usr \
-        -DCMAKE_MODULE_PATH=$SYSROOT_PREFIX/usr/lib/kodi \
-        -DCMAKE_PREFIX_PATH=$SYSROOT_PREFIX/usr \
-        ..
-}
-
-addon() {
-  mkdir -p $ADDON_BUILD/$PKG_ADDON_ID/
-  cp -PR $PKG_BUILD/.install_pkg/usr/share/kodi/addons/$PKG_NAME/* $ADDON_BUILD/$PKG_ADDON_ID/
-  cp -PL $PKG_BUILD/.install_pkg/usr/lib/kodi/addons/$PKG_NAME/*.so $ADDON_BUILD/$PKG_ADDON_ID/
+pre_configure_target() {
+  CFLAGS="$CFLAGS -fPIC -DPIC"
 }
