@@ -33,14 +33,14 @@ PKG_AUTORECONF="no"
 
 case "$KODIPLAYER_DRIVER" in
   bcm2835-firmware)
-    PKG_VERSION="67cf03a"
+    PKG_VERSION="dc27501"
     PKG_GIT_URL="https://github.com/OpenELEC/xbmc.git"
     PKG_GIT_BRANCH="newclock5"
     PKG_KEEP_CHECKOUT="no"
     ;;
   *)
-    PKG_VERSION="2331b6e"
-    PKG_GIT_URL="https://github.com/OpenELEC/xbmc.git"
+    PKG_VERSION="eceb0d6"
+    PKG_GIT_URL="https://github.com/xbmc/xbmc.git"
     PKG_GIT_BRANCH="master"
     PKG_KEEP_CHECKOUT="no"
     ;;
@@ -282,6 +282,19 @@ PKG_CONFIGURE_OPTS_TARGET="gl_cv_func_gettimeofday_clobber=no \
                            $KODI_CODEC \
                            $KODI_PLAYER"
 
+build_cmake_hosttool() {
+# this build a cmake tool for host with cmake
+# usage 'build_cmake_hosttool <path/to/source>'
+  mkdir -p $ROOT/$PKG_BUILD/$1/build
+  cd $ROOT/$PKG_BUILD/$1/build
+    cmake -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
+          -DCMAKE_INSTALL_PREFIX=$ROOT/$TOOLCHAIN \
+          -DCORE_SOURCE_DIR=$ROOT/$PKG_BUILD \
+          ..
+    make
+  cd $ROOT/$PKG_BUILD
+}
+
 pre_configure_host() {
 # kodi fails to build in subdirs
   cd $ROOT/$PKG_BUILD
@@ -295,12 +308,12 @@ configure_host() {
 }
 
 make_host() {
-  make -C tools/depends/native/JsonSchemaBuilder
+  build_cmake_hosttool tools/depends/native/JsonSchemaBuilder
   make -C tools/depends/native/TexturePacker
 }
 
 makeinstall_host() {
-  cp -PR tools/depends/native/JsonSchemaBuilder/native/JsonSchemaBuilder $ROOT/$TOOLCHAIN/bin
+  cp -PR tools/depends/native/JsonSchemaBuilder/build/JsonSchemaBuilder $ROOT/$TOOLCHAIN/bin
   rm -f $ROOT/$TOOLCHAIN/bin/TexturePacker
   cp -PR tools/depends/native/TexturePacker/native/TexturePacker $ROOT/$TOOLCHAIN/bin
 }
