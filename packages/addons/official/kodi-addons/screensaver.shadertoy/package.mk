@@ -16,33 +16,34 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="visualization.shadertoy"
-PKG_VERSION="5b64785"
+PKG_NAME="screensaver.shadertoy"
+PKG_VERSION="394de3d"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/notspiff/visualization.shadertoy"
-PKG_GIT_URL="https://github.com/notspiff/visualization.shadertoy"
+PKG_SITE="https://github.com/popcornmix/screensaver.shadertoy"
+PKG_GIT_URL="https://github.com/popcornmix/screensaver.shadertoy.git"
 PKG_GIT_BRANCH="master"
 PKG_DEPENDS_TARGET="toolchain kodi-platform"
 PKG_PRIORITY="optional"
 PKG_SECTION=""
-PKG_SHORTDESC="visualization.shadertoy"
-PKG_LONGDESC="visualization.shadertoy"
+PKG_SHORTDESC="screensaver.shadertoy"
+PKG_LONGDESC="screensaver.shadertoy"
 PKG_AUTORECONF="no"
 
 PKG_IS_ADDON="yes"
-PKG_ADDON_TYPE="xbmc.player.musicviz"
+PKG_ADDON_TYPE="xbmc.ui.screensaver"
 
 if [ ! "$OPENGL" = "no" ]; then
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $OPENGL glew"
 fi
 
 if [ "$OPENGLES_SUPPORT" = yes ]; then
+# for OpenGL-ES support
   PKG_DEPENDS_TARGET="$PKG_DEPENDS_TARGET $OPENGLES"
 fi
 
-configure_target() {
+pre_configure_target() {
   if [ "$KODIPLAYER_DRIVER" = bcm2835-firmware ]; then
     BCM2835_INCLUDES="-I$SYSROOT_PREFIX/usr/include/interface/vcos/pthreads/ \
                       -I$SYSROOT_PREFIX/usr/include/interface/vmcs_host/linux"
