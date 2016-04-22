@@ -18,13 +18,13 @@
 
 PKG_NAME="connman"
 # DO NOT UPGRADE!!
-PKG_VERSION="1.31"
+PKG_VERSION="1.32"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.connman.net"
 PKG_URL="https://www.kernel.org/pub/linux/network/connman/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain glib readline dbus iptables wpa_supplicant"
+PKG_DEPENDS_TARGET="toolchain glib readline netbsd-curses dbus iptables wpa_supplicant"
 PKG_PRIORITY="optional"
 PKG_SECTION="network"
 PKG_SHORTDESC="connman: Network manager daemon"
