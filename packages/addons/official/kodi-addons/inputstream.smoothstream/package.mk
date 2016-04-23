@@ -16,23 +16,22 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="pvr.stalker"
-PKG_VERSION="14a7c70"
+PKG_NAME="inputstream.smoothstream"
+PKG_VERSION="e30e1d1"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
-PKG_SITE="http://www.kodi.tv"
-PKG_GIT_URL="https://github.com/kodi-pvr/pvr.stalker"
+PKG_SITE="https://github.com/mapfau/inputstream.smoothstream"
+PKG_GIT_URL="https://github.com/mapfau/inputstream.smoothstream"
 PKG_GIT_BRANCH="master"
-PKG_DEPENDS_TARGET="toolchain kodi-platform jsoncpp tinyxml"
+PKG_DEPENDS_TARGET="toolchain kodi-platform expat"
 PKG_PRIORITY="optional"
 PKG_SECTION=""
-PKG_SHORTDESC="pvr.stalker"
-PKG_LONGDESC="pvr.stalker"
+PKG_SHORTDESC="inputstream.smoothstream"
+PKG_LONGDESC="inputstream.smoothstream"
 PKG_AUTORECONF="no"
 
 PKG_IS_ADDON="yes"
-PKG_ADDON_TYPE="xbmc.pvrclient"
 
 configure_target() {
   cmake -DCMAKE_TOOLCHAIN_FILE=$CMAKE_CONF \
